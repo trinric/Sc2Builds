@@ -1,6 +1,17 @@
 <template name="buildsList">
-	<p> Test </p>
-	{{#each builds}}
-		{{ name }}		
-	{{/each}}
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th> Votes </th>
+				<th> Name </th> 
+				<th> Race </th>
+				<th> Against </th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each builds}}
+				{{> buildRow }}
+			{{/each}}
+		</tbody>
+	</table>
 </template>
