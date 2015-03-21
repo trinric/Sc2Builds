@@ -1,3 +1,7 @@
+/**
+*  This file handles the table on the main page
+*/
+
 Template.buildsList.helpers({
 	builds : function() {
 		return Builds.find({});
@@ -9,7 +13,12 @@ Template.buildsList.helpers({
 		}
 	}
 });
-
+Template.buildsList.events({
+	'click .reactive-table tr' : function(event){
+		var build = this;
+		Router.go('singleBuild', {_id : build._id});
+	}
+});
 
 Template.raceFilter.created = function() {
 	this.filter = new ReactiveTable.Filter('race-filter', ['race']);
