@@ -1,27 +1,53 @@
-/**
-* This is the basic filtering for the table on the front page
-* Going to clean this up later since there is a lot of almost repeated lines
-*
-*/
-var racelist = ['zerg', 'terran', 'protoss'];
-
 Template.buildsList.helpers({
 	builds : function() {
-		if (typeof(Session.get('race-select')) == 'undefined' || Session.get('race-select') == 'all races'){
-			Session.set('race-select', racelist);
+		return Builds.find({});
+	},
+	settings : function(){
+		return {
+			fields : ['name', 'race', 'against'],
+			filters : ['race-filter', 'against-filter', 'author-filter']
 		}
-		if (typeof(Session.get('against-select')) == 'undefined' || Session.get('against-select') == 'all races'){
-			Session.set('against-select', racelist);
-		}
-		return Builds.find({race : {$in : Session.get("race-select")}, against : {$in : Session.get("against-select")}}, { sort: { createdAt: -1 } });
 	}
 });
 
-Template.buildsList.events({
-	"change #race-select" : function(e){
-		Session.set('race-select', [$(e.target).val().toLowerCase()])
-	},
-	"change #against-select" : function(e) {
-		Session.set('against-select', [$(e.target).val().toLowerCase()])
+
+Template.raceFilter.created = function() {
+	this.filter = new ReactiveTable.Filter('race-filter', ['race']);
+};
+
+Template.raceFilter.events({
+	"change" : function(event, template) {
+		var input = $(event.target).val().toLowerCase();
+		if(input != 'all races'){
+			template.filter.set(input);
+		}else {
+			template.filter.set("");
+		}
 	}
-})
+});
+
+Template.againstFilter.created = function() {
+	this.filter = new ReactiveTable.Filter('against-filter', ['against']);
+};
+
+Template.againstFilter.events({
+	"change" : function(event, template) {
+		var input = $(event.target).val().toLowerCase();
+		if(input != 'all races'){
+			template.filter.set(input);
+		}else {
+			template.filter.set("");
+		}
+	}
+});
+
+Template.authorFilter.created = function() {
+	this.filter = new ReactiveTable.Filter('author-filter', ['author']);
+}
+
+Template.authorFilter.events({
+	'keyup .author-input, input .author-input' : function(event, template){
+		var input = $(event.target).val();
+		template.filter.set(input);
+	}
+});

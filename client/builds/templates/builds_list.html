@@ -1,24 +1,28 @@
 <template name="buildsList">
-	<div class="filter form-inline">
-		Main Race 
-		<select id="race-select" class="form-control"> <option> All Races </option><option>Zerg</option> <option>Protoss </option><option>Terran</option></select>
-		Against Race 
-		<select id="against-select" class="form-control"> <option> All Races </option><option>Zerg</option> <option>Protoss </option><option>Terran</option></select>
+	<div class="form-inline">
+	{{> raceFilter}}
+	{{> againstFilter}}
+	{{> authorFilter}}
 	</div>
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th> Votes </th>
-				<th> Name </th> 
-				<th> Race </th>
-				<th> Against </th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each builds}}
-				{{> buildRow }}
-			{{/each}}
-		</tbody>
-	</table>
+	{{> reactiveTable collection=builds settings=settings}}
 </template>
 
+
+<template name="raceFilter">
+		Main Race 
+		<select id="race-select" class="form-control"> <option> All Races </option><option>Zerg</option> <option>Protoss </option><option>Terran</option></select>
+</template>
+<template name="againstFilter">
+		Against Race
+		<select id="race-select" class="form-control"> <option> All Races </option><option>Zerg</option> <option>Protoss </option><option>Terran</option></select>
+</template>
+
+
+<template name="authorFilter">
+	<div class="input-group">
+      <span class="input-group-addon">
+        <span>Author Name </span>
+      </span>
+      <input class="form-control author-input" type="text"/>
+    </div>
+</template>
