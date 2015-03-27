@@ -1,7 +1,5 @@
-AutoForm.hooks({
-  submitPostForm: {
-    onSuccess: function(operation, build) {
-      Router.go('singleBuild', build);
-    }
-  }
+AutoForm.addHooks(['submitBuildForm'], {
+    onSuccess : function(formType, result) {
+		Router.go('singleBuild', result);
+	}
 });
