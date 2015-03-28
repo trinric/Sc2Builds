@@ -9,7 +9,8 @@ Template.buildsList.helpers({
 	settings : function(){
 		return {
 			fields : ['name', 'race', 'against'],
-			filters : ['race-filter', 'against-filter', 'author-filter']
+			filters : ['race-filter', 'against-filter', 'author-filter'],
+			rowsPerPage : 15
 		}
 	}
 });
