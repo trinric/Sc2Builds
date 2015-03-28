@@ -1,0 +1,16 @@
+<template name="singleBuildPage">
+		<h2> {{ name }} <small> by {{ author }} </small>
+		{{#if isOwner}}
+			<a id="updateButton" class="btn btn-default btn-sm" href="{{pathFor route='updateBuild' _id=this._id }}">
+  				<i class="fa fa-pencil"></i> Update</a>
+		{{/if}} 
+		</h2> 
+		
+	<div class="well">		
+		<p id="build"> {{ build }} </p>
+	</div>
+	<div>
+		<h3> Additional Notes </h3>
+		{{ notes }}
+	</div>
+</template>
